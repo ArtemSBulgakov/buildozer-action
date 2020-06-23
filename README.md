@@ -41,6 +41,19 @@ Filename of built package relative to repository root.
 
 - Example: `test_app/bin/testapp-0.1-armeabi-v7a-debug.apk`
 
+## Environment variables
+
+You can set environment variables to change Buildozer settings. See
+[Buildozer Readme](https://github.com/kivy/buildozer#default-config) for more
+information.
+
+Example (change Android architecture):
+
+```yaml
+env:
+  APP_ANDROID_ARCH: armeabi-v7a
+```
+
 ## Caching
 
 You can set up cache for Buildozer global and local directories. Global

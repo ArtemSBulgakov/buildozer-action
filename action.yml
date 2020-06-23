@@ -5,6 +5,16 @@ branding:
   icon: package
   color: yellow
 
+inputs:
+  command:
+    description: Command to start Buildozer. Set to `buildozer ios debug` for iOS
+    required: true
+    default: buildozer android debug
+  workdir:
+    description: Working directory where buildozer.spec is located. Set to `src` if buildozer.spec is in `src` directory
+    required: true
+    default: .
+
 runs:
   using: docker
   image: Dockerfile

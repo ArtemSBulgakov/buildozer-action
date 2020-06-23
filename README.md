@@ -77,7 +77,7 @@ Example:
 - name: Cache Buildozer global directory
   uses: actions/cache@v2
   with:
-    path: .buildozer-global
+    path: .buildozer_global
     key: buildozer-global-${{ hashFiles('test_app/buildozer.spec') }} # Replace with your path
 ```
 

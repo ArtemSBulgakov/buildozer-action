@@ -15,6 +15,10 @@ inputs:
     required: true
     default: .
 
+outputs:
+  filename:
+    description: Filename of built package
+
 runs:
   using: docker
   image: Dockerfile

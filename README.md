@@ -21,11 +21,20 @@ but adds some features and patches to use in GitHub Actions.
 - _Default:_ `.` (top directory).
 - Set to `src` if buildozer.spec is in `src` directory.
 
+## Outputs
+
+### `filename`
+
+Filename of built package relative to repository root.
+
+- Example: `test_app/bin/testapp-0.1-armeabi-v7a-debug.apk`
+
 ## Example usage
 
 ```yaml
 - name: Build with Buildozer
   uses: ArtemSBulgakov/buildozer-action@v1
+  id: buildozer
   with:
     command: buildozer android debug
     workir: src

@@ -26,3 +26,11 @@ fi
 
 # Give access to root
 sudo chown -R root "$GITHUB_WORKSPACE"
+
+# Set output
+if [ ! -d bin ]; then
+  echo ::error::Output directory does not exist. See Buildozer log for error
+  exit 1
+fi
+filename=$(ls bin | head -n1)
+echo ::set-output name=filename::"$INPUT_WORKDIR/bin/$filename"

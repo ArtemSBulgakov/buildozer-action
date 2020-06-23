@@ -123,6 +123,12 @@ jobs:
           path: ${{ steps.buildozer.outputs.filename }}
 ```
 
+## Action versioning
+
+Currently it is recommended to use `v1` tag. This tag updates when new `v1.x.x`
+version released. All `v1` versions will have backward compatibility. You will
+get warning when `v2` will be released.
+
 ## How to build packages locally
 
 Use official Buildozer's [Docker image](https://hub.docker.com/r/kivy/buildozer)

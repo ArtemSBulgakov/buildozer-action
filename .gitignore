@@ -1,0 +1,52 @@
+# Directories and files that cannot be commited to git
+
+# Editors
+.idea
+.vscode
+*.swp
+
+# Byte-compiled
+__pycache__
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+lib
+lib64
+parts
+sdist
+var
+wheels
+pip-wheel-metadata
+share/python-wheels
+develop-eggs
+eggs
+.eggs
+*.egg-info
+*.egg
+MANIFEST
+.installed.cfg
+downloads
+build
+dist
+bin
+.buildozer
+
+# Logs
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environments
+venv
+.venv
+env
+.env
+.python-version
+
+#  Temp / Cache
+cache
+.cache
+temp
+.temp

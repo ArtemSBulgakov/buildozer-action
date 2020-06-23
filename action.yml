@@ -1,0 +1,10 @@
+name: Buildozer
+description: Build Python package with Kivy Buildozer
+author: Artem Bulgakov
+branding:
+  icon: package
+  color: yellow
+
+runs:
+  using: docker
+  image: Dockerfile

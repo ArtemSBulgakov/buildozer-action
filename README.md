@@ -41,6 +41,30 @@ Filename of built package relative to repository root.
 
 - Example: `test_app/bin/testapp-0.1-armeabi-v7a-debug.apk`
 
+## Caching
+
+You can set up cache for Buildozer global and local directories. Global
+directory is in root of repository. Local directory is in workdir.
+
+- Global: `.buildozer-global` (sdk, ndk, platform-tools)
+- Local: `test_app/.buildozer` (dependencies, build temp, _not recommended to cache_)
+
+I don't recommend to cache local buildozer directory because Buildozer doesn't
+automatically update dependencies to latest version.
+
+Use cache only if it speeds up your workflow! Usually this only adds 1-3 minutes
+to job running time, so I don't use it.
+
+Example:
+
+```yaml
+- name: Cache Buildozer global directory
+  uses: actions/cache@v2
+  with:
+    path: .buildozer-global
+    key: buildozer-global-${{ hashFiles('test_app/buildozer.spec') }} # Replace with your path
+```
+
 ## Example usage
 
 ```yaml

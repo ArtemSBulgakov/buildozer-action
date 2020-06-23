@@ -34,6 +34,14 @@ if ! cd "$INPUT_WORKDIR"; then
   exit 1
 fi
 
+# Apply patches
+echo ::group::Applying patches to Buildozer
+if ! python3 /action/patches.py; then
+  echo ::error::Error while running patches.py
+  # exit 1  # Allow to fail
+fi
+echo ::endgroup::
+
 # Run command
 if ! sh -c "$INPUT_COMMAND"; then
   echo ::error::Error while executing command \""$INPUT_COMMAND"\"

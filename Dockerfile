@@ -11,5 +11,6 @@ RUN pip3 uninstall -y buildozer
 RUN echo "Set disable_coredump false" | sudo tee -a /etc/sudo.conf > /dev/null
 
 COPY entrypoint.sh /action/entrypoint.sh
+COPY patches.py /action/patches.py
 
 ENTRYPOINT ["/action/entrypoint.sh"]

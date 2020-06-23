@@ -1,5 +1,8 @@
 # Buildozer action
 
+[![Build workflow](https://github.com/ArtemSBulgakov/buildozer-action/workflows/Build/badge.svg?branch=master)](https://github.com/ArtemSBulgakov/buildozer-action/actions?query=workflow%3ABuild)
+[![Build (with Buildozer master) workflow](https://github.com/ArtemSBulgakov/buildozer-action/workflows/Build%20(with%20Buildozer%20master)/badge.svg?branch=master)](https://github.com/ArtemSBulgakov/buildozer-action/actions?query=workflow%3A%22Build+%28with+Buildozer+master%29%22)
+
 Build your Python/[Kivy](https://github.com/kivy/kivy) applications for Android
 with [Buildozer](https://github.com/kivy/buildozer). This action uses official
 Buildozer [Docker image](https://github.com/kivy/buildozer/blob/master/Dockerfile),

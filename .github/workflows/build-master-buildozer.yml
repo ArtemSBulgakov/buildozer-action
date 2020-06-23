@@ -1,0 +1,25 @@
+name: Build (with Buildozer master)
+on: [push, pull_request]
+
+jobs:
+  # Build job. Builds app for Android with Buildozer
+  build-android:
+    name: Build for Android (with Buildozer master)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build with Buildozer
+        uses: ./ # REPLACE WITH ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          workdir: test_app
+          buildozer_version: master
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: ${{ steps.buildozer.outputs.filename }}

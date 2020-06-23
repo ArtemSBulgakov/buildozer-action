@@ -120,6 +120,13 @@ jobs:
           path: ${{ steps.buildozer.outputs.filename }}
 ```
 
+## Contributing
+
+Please create Bug Request if you have problems with running this action or
+Feature Request if you have ideas how to improve it. If you know how to fix
+something, feel free to fork repository and create Pull Request. Test your
+changes in fork before creating Pull Request.
+
 ## License
 
 ArtemSBulgakov/buildozer-action is released under the terms of the

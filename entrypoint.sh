@@ -5,6 +5,22 @@ sudo chown -R "$USER" "$GITHUB_WORKSPACE"
 # GitHub sets HOME to /github/home, but Buildozer is installed to /home/user. Change HOME to user's home
 export HOME=$HOME_DIR
 
+# Install required Buildozer version
+echo ::group::Installing Buildozer
+PIP_INSTALL="pip3 install --user --upgrade"
+if [[ "$INPUT_BUILDOZER_VERSION" == "stable" ]]; then
+  $PIP_INSTALL buildozer  # Install stable buildozer from PyPI
+elif [[ -d "$INPUT_BUILDOZER_VERSION" ]]; then
+  $PIP_INSTALL "$INPUT_BUILDOZER_VERSION"  # Install from local directory
+elif [[ "$INPUT_BUILDOZER_VERSION" == "git+"* ]]; then
+  $PIP_INSTALL "$INPUT_BUILDOZER_VERSION"  # Install from specified git+ link
+elif [[ "$INPUT_BUILDOZER_VERSION" == "" ]]; then
+  echo ::warning::Buildozer is not installed because specified buildozer_version is nothing.  # Just do nothing
+else
+  $PIP_INSTALL "git+https://github.com/kivy/buildozer.git@$INPUT_BUILDOZER_VERSION"  # Install specified ref from repository
+fi
+echo ::endgroup::
+
 # Buildozer settings to disable interactions
 export BUILDOZER_WARN_ON_ROOT=0
 export APP_ANDROID_ACCEPT_SDK_LICENSE=1

@@ -21,6 +21,18 @@ but adds some features and patches to use in GitHub Actions.
 - _Default:_ `.` (top directory).
 - Set to `src` if buildozer.spec is in `src` directory.
 
+### `buildozer_version`
+
+**Required** Version of Buildozer to install.
+
+- _Default:_ `stable` (latest release on PyPI, `pip install buildozer`).
+- Set to `master` to use [master](https://github.com/kivy/buildozer/tree/master) branch _(`pip install git+https://github.com/kivy/buildozer.git@master`)_.
+- Set to [tag](https://github.com/kivy/buildozer/tree/1.2.0) name `1.2.0` to use specific release _(`pip install git+https://github.com/kivy/buildozer.git@1.2.0`)_.
+- Set to [commit](https://github.com/kivy/buildozer/tree/94cfcb8) hash `94cfcb8` to use specific commit _(`pip install git+https://github.com/kivy/buildozer.git@94cfcb8`)_.
+- Set to git+ address `git+https://github.com/username/buildozer.git@master` to use fork.
+- Set to directory name `./my_buildozer` to install from local path _(`pip install ./my_buildozer`)_.
+- Set to nothing `''` to not install buildozer
+
 ## Outputs
 
 ### `filename`
@@ -38,6 +50,7 @@ Filename of built package relative to repository root.
   with:
     command: buildozer android debug
     workir: src
+    buildozer_version: stable
 ```
 
 ## License

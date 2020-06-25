@@ -1,5 +1,9 @@
 name: Build (with Buildozer master)
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: 0 0 * * * # at 00:00 UTC every day
 
 jobs:
   # Build job. Builds app for Android with Buildozer

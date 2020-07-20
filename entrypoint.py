@@ -46,7 +46,7 @@ def install_buildozer(buildozer_version):
     if buildozer_version == "stable":
         # Install stable buildozer from PyPI
         subprocess.check_call([*pip_install, "buildozer"])
-    elif os.path.exists(buildozer_version):
+    elif os.path.exists(buildozer_version) and os.path.exists(os.path.join(buildozer_version, "buildozer", "__init__.py")):
         # Install from local directory
         subprocess.check_call([*pip_install, buildozer_version])
     elif buildozer_version.startswith("git+"):

@@ -194,6 +194,16 @@ jobs:
         run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
 ```
 
+## Examples
+
+You can [search GitHub](https://github.com/search?q=buildozer-action+extension%3Ayml+path%3A.github%2Fworkflows&type=Code)
+for repositories that use this action.
+
+Some great examples:
+
+- [KivyMD](https://github.com/HeaTTheatR/KivyMD/blob/master/.github/workflows/build-demos.yml)
+  - build several demo apps
+
 ## Action versioning
 
 Currently it is recommended to use `v1` tag. This tag updates when new `v1.x.x`

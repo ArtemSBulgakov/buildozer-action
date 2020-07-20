@@ -10,6 +10,10 @@ inputs:
     description: Command to start Buildozer. Set to `buildozer ios debug` for iOS
     required: true
     default: buildozer android debug
+  repository_root:
+    description: Path to cloned repository. Set if you specified path for `actions/checkout` action.
+    required: true
+    default: .
   workdir:
     description: Working directory where buildozer.spec is located. Set to `src` if buildozer.spec is in `src` directory
     required: true

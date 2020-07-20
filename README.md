@@ -15,7 +15,14 @@ but adds some features and patches to use in GitHub Actions.
 **Required** Command to start Buildozer.
 
 - _Default:_ `buildozer android debug` _(iOS and OSX is not supported because Docker cannot run on MacOS)_.
-- For more commands use `;` as delimiter: `python3 setup.py build_ext --inplace; buildozer android debug`.
+- For more commands use `;` as delimiter: `python3 pre_buildozer.py; buildozer android debug`.
+
+### `repository_root`
+
+**Required** Path to cloned repository.
+
+- _Default:_ `.` (GitHub workspace).
+- Set to directory name if you specified path for `actions/checkout` action.
 
 ### `workdir`
 

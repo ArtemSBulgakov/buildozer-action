@@ -100,11 +100,63 @@ Example:
     buildozer_version: stable
 ```
 
+## Uploading binaries
+
+### As artifact
+
+You can upload binary as artifact to run. You will be able to download it by
+clicking on "Artifacts" button on run page (where you see logs).
+
+```yaml
+- name: Upload artifacts
+  uses: actions/upload-artifact@v2
+  with:
+    name: package
+    path: ${{ steps.buildozer.outputs.filename }}
+```
+
+### To branch
+
+Artifacts use GitHub Storage and you have to pay for private repositories when
+limit exceeded. Another way to upload binary is pushing it to branch in your
+repository.
+
+Copy [.ci/move_binary.py](.ci/move_binary.py) script, edit it if you want and
+add this to your workflow:
+
+```yaml
+- name: Checkout
+  uses: actions/checkout@v2
+  with:
+    path: data
+    ref: data # Branch name
+
+- name: Set up Python
+  uses: actions/setup-python@v2
+  with:
+    python-version: 3.7
+    architecture: x64
+
+- name: Push binary to data branch
+  run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
+```
+
 ## Full workflow
+
+Builds app and uploads to the `data` branch. Also copy
+[.ci/move_binary.py](.ci/move_binary.py) script.
 
 ```yaml
 name: Build
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - data
+      - gh-pages
+  pull_request:
+    branches-ignore:
+      - data
+      - gh-pages
 
 jobs:
   # Build job. Builds app for Android with Buildozer
@@ -115,19 +167,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: master
 
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
+          repository_root: master
           workdir: test_app
           buildozer_version: stable
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: data
+          ref: data # Branch name
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+          architecture: x64
+
+      - name: Push binary to data branch
+        run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
 ```
 
 ## Action versioning

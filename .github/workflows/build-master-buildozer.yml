@@ -1,9 +1,13 @@
 name: Build (with Buildozer master)
 on:
   push:
+    branches-ignore:
+      - data
+      - gh-pages
   pull_request:
-  schedule:
-    - cron: 0 0 */4 * * # at 00:00 UTC every fourth day
+    branches-ignore:
+      - data
+      - gh-pages
 
 jobs:
   # Build job. Builds app for Android with Buildozer
@@ -14,16 +18,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: master
 
       - name: Build with Buildozer
-        uses: ./ # REPLACE WITH ArtemSBulgakov/buildozer-action@v1
+        uses: ./master # REPLACE WITH ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
+          repository_root: master
           workdir: test_app
           buildozer_version: master
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: data
+          ref: data # Branch name
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+          architecture: x64
+
+      - name: Push binary to data branch
+        run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data bin-with-master

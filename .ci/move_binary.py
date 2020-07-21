@@ -7,7 +7,8 @@ import subprocess
 
 binary_filename = os.path.abspath(sys.argv[1])
 master_repository_directory = os.path.abspath(sys.argv[2])
-data_repository_directory = os.path.abspath(sys.argv[3])
+data_repository = sys.argv[3]
+data_repository_directory = os.path.abspath(data_repository)
 directory = sys.argv[4]
 
 os.chdir(master_repository_directory)
@@ -40,7 +41,9 @@ shutil.copy(binary_filename, os.path.join(directory, filename))
 # Push changes
 subprocess.check_call(["git", "config", "user.name", author_name])
 subprocess.check_call(["git", "config", "user.email", author_email])
-subprocess.check_call(["git", "pull"])  # Ensure that there is no changes
+subprocess.check_call(["git", "pull", "--ff-only"])  # Ensure that there is no changes
 subprocess.check_call(["git", "add", os.path.join(directory, filename)])
 subprocess.check_call(["git", "commit", "-m", f"Add binary for {commit_hash}: \"{commit_subject}\""])
 subprocess.check_call(["git", "push"])
+
+print(f"Binary file: {env['GITHUB_SERVER_URL']}/{env['GITHUB_REPOSITORY']}/blob/{data_repository}/{directory}/{filename}")

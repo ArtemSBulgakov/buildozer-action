@@ -40,6 +40,7 @@ shutil.copy(binary_filename, os.path.join(directory, filename))
 # Push changes
 subprocess.check_call(["git", "config", "user.name", author_name])
 subprocess.check_call(["git", "config", "user.email", author_email])
+subprocess.check_call(["git", "pull"])  # Ensure that there is no changes
 subprocess.check_call(["git", "add", os.path.join(directory, filename)])
 subprocess.check_call(["git", "commit", "-m", f"Add binary for {commit_hash}: \"{commit_subject}\""])
 subprocess.check_call(["git", "push"])

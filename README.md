@@ -201,7 +201,7 @@ for repositories that use this action.
 
 Some great examples:
 
-- [KivyMD](https://github.com/HeaTTheatR/KivyMD/blob/master/.github/workflows/build-demos.yml)
+- [HeaTTheatR/KivyMD](https://github.com/HeaTTheatR/KivyMD/blob/master/.github/workflows/build-demos.yml)
   - build several demo apps
 
 ## Action versioning

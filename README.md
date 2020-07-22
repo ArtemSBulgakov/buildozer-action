@@ -8,6 +8,8 @@ with [Buildozer](https://github.com/kivy/buildozer). This action uses official
 Buildozer [Docker image](https://github.com/kivy/buildozer/blob/master/Dockerfile),
 but adds some features and patches to use in GitHub Actions.
 
+*You may want to skip a lot of text and go to [workflow example](#full-workflow).*
+
 ## Inputs
 
 ### `command`

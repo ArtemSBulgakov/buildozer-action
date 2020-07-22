@@ -141,10 +141,21 @@ add this to your workflow:
   run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
 ```
 
+Also you need to create `data` branch:
+```bash
+git checkout --orphan data
+# Here you need to create README.md
+# ...
+git add README.md
+git commit -m "Add Readme"
+git push origin data
+```
+
 ## Full workflow
 
 Builds app and uploads to the `data` branch. Also copy
-[.ci/move_binary.py](.ci/move_binary.py) script.
+[.ci/move_binary.py](.ci/move_binary.py) script and create `data` branch as
+described above.
 
 ```yaml
 name: Build

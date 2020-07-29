@@ -8,6 +8,8 @@ on:
     branches-ignore:
       - data
       - gh-pages
+  schedule:
+      - cron: 0 0 */4 * * # at 00:00 UTC every fourth day
 
 jobs:
   # Build job. Builds app for Android with Buildozer

@@ -250,6 +250,7 @@ Some great examples:
 
 - [HeaTTheatR/KivyMD](https://github.com/HeaTTheatR/KivyMD/blob/master/.github/workflows/build-demos.yml)
   - build several demo apps
+  - push binaries to `data` branch
 
 ## Action versioning
 

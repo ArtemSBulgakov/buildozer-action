@@ -209,6 +209,38 @@ jobs:
         run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
 ```
 
+<details>
+  <summary>Full workflow with uploading binaries as artifact</summary>
+
+  ```yaml
+  name: Build
+  on: [push, pull_request]
+
+  jobs:
+    # Build job. Builds app for Android with Buildozer
+    build-android:
+      name: Build for Android
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Build with Buildozer
+          uses: ArtemSBulgakov/buildozer-action@v1
+          id: buildozer
+          with:
+            workdir: test_app
+            buildozer_version: stable
+
+        - name: Upload artifacts
+          uses: actions/upload-artifact@v2
+          with:
+            name: package
+            path: ${{ steps.buildozer.outputs.filename }}
+  ```
+</details>
+
 ## Examples
 
 You can [search GitHub](https://github.com/search?q=buildozer-action+extension%3Ayml+path%3A.github%2Fworkflows&type=Code)

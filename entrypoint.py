@@ -46,7 +46,9 @@ def install_buildozer(buildozer_version):
     if buildozer_version == "stable":
         # Install stable buildozer from PyPI
         subprocess.check_call([*pip_install, "buildozer"])
-    elif os.path.exists(buildozer_version) and os.path.exists(os.path.join(buildozer_version, "buildozer", "__init__.py")):
+    elif os.path.exists(buildozer_version) and os.path.exists(
+        os.path.join(buildozer_version, "buildozer", "__init__.py")
+    ):
         # Install from local directory
         subprocess.check_call([*pip_install, buildozer_version])
     elif buildozer_version.startswith("git+"):
@@ -134,8 +136,11 @@ def set_output(repository_root, workdir):
     if not os.path.exists("bin"):
         print("::error::Output directory does not exist. See Buildozer log for error")
         exit(1)
-    filename = [file for file in os.listdir("bin") if os.path.isfile(os.path.join("bin", file))][0]
-    print(f"::set-output name=filename::{os.path.join(repository_root, workdir, 'bin', filename)}")
+    filename = [
+        file for file in os.listdir("bin") if os.path.isfile(os.path.join("bin", file))
+    ][0]
+    path = os.path.normpath(os.path.join(repository_root, workdir, "bin", filename))
+    print(f"::set-output name=filename::{path}")
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ os.chdir(master_repository_directory)
 
 filename = os.path.basename(binary_filename)
 commit_hash = subprocess.check_output(["git", "rev-parse", "--verify", "--short", "HEAD"]).decode("utf-8").strip()
-commit_subject = subprocess.check_output(["git", "log", "-1", "--pretty=format:'%s'"]).decode("utf-8").strip()
+commit_subject = subprocess.check_output(["git", "log", "-1", "--pretty=format:%s"]).decode("utf-8").strip()
 
 is_tag = env["GITHUB_EVENT_NAME"] == "push" and env["GITHUB_REF"].startswith("refs/tags")
 if not is_tag:
@@ -30,8 +30,8 @@ if not is_tag:
     filename = "-".join([*filename_split[:2], middle, *filename_split[2:]])
 
 # Set author info to the latest commit author
-author_name = subprocess.check_output(["git", "log", "-1", "--pretty=format:'%an'"]).decode("utf-8")
-author_email = subprocess.check_output(["git", "log", "-1", "--pretty=format:'%ae'"]).decode("utf-8")
+author_name = subprocess.check_output(["git", "log", "-1", "--pretty=format:%an"]).decode("utf-8")
+author_email = subprocess.check_output(["git", "log", "-1", "--pretty=format:%ae"]).decode("utf-8")
 
 # Move file
 os.chdir(data_repository_directory)

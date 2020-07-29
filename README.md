@@ -166,6 +166,8 @@ on:
     branches-ignore:
       - data
       - gh-pages
+    tags:
+      - '**'
   pull_request:
     branches-ignore:
       - data

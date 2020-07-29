@@ -11,8 +11,8 @@ order.
 """
 
 import os
-from os import environ as env
 import subprocess
+from os import environ as env
 
 
 def main():
@@ -134,12 +134,18 @@ def run_command(command):
 
 def set_output(repository_root, workdir):
     if not os.path.exists("bin"):
-        print("::error::Output directory does not exist. See Buildozer log for error")
+        print(
+            "::error::Output directory does not exist. See Buildozer log for error"
+        )
         exit(1)
     filename = [
-        file for file in os.listdir("bin") if os.path.isfile(os.path.join("bin", file))
+        file
+        for file in os.listdir("bin")
+        if os.path.isfile(os.path.join("bin", file))
     ][0]
-    path = os.path.normpath(os.path.join(repository_root, workdir, "bin", filename))
+    path = os.path.normpath(
+        os.path.join(repository_root, workdir, "bin", filename)
+    )
     print(f"::set-output name=filename::{path}")
 
 

@@ -94,7 +94,8 @@ def apply_patches():
     # Apply patches
     print("::group::Applying patches to Buildozer")
     try:
-        import buildozer
+        import importlib
+        globals()["buildozer"] = importlib.import_module("buildozer")
     except ImportError:
         print(
             "::error::Cannot apply patches to buildozer (ImportError). "

@@ -49,9 +49,9 @@ but adds some features and patches to use in GitHub Actions.
 
 ### `filename`
 
-Filename of built package relative to repository root.
+Filename of built package relative to `GITHUB_WORKSPACE`.
 
-- Example: `test_app/bin/testapp-0.1-armeabi-v7a-debug.apk`
+- Example: `master/test_app/bin/testapp-0.1-armeabi-v7a-debug.apk`
 
 ## Environment variables
 

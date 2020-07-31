@@ -146,8 +146,7 @@ add this to your workflow:
 Also you need to create `data` branch:
 ```bash
 git checkout --orphan data
-# Here you need to create README.md
-# ...
+echo # Branch `data` > README.md
 git add README.md
 git commit -m "Add Readme"
 git push origin data

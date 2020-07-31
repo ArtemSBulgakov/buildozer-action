@@ -99,6 +99,7 @@ def apply_patches():
             "::error::Cannot apply patches to buildozer (ImportError). "
             "Update buildozer-action to new version or create a Bug Request"
         )
+        print("::endgroup::")
         return
 
     print("Changing global_buildozer_dir")

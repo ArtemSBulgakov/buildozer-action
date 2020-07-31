@@ -11,8 +11,8 @@ order.
 """
 
 import os
-import sys
 import subprocess
+import sys
 from os import environ as env
 
 
@@ -96,6 +96,7 @@ def apply_patches():
     try:
         import importlib
         import site
+
         importlib.reload(site)
         globals()["buildozer"] = importlib.import_module("buildozer")
     except ImportError:
@@ -113,12 +114,12 @@ def apply_patches():
     @property
     def global_buildozer_dir(self):
         return join(expanduser('~'), '.buildozer')
-    """,
+""",
         f"""
     @property
     def global_buildozer_dir(self):
         return '{os.environ["GITHUB_WORKSPACE"]}/.buildozer_global'
-    """,
+""",
     )
     if new_source == source:
         print(

@@ -11,6 +11,7 @@ order.
 """
 
 import os
+import sys
 import subprocess
 from os import environ as env
 
@@ -42,7 +43,7 @@ def fix_home():
 def install_buildozer(buildozer_version):
     # Install required Buildozer version
     print("::group::Installing Buildozer")
-    pip_install = "pip3 install --user --upgrade".split()
+    pip_install = [sys.executable] + "-m pip install --user --upgrade".split()
     if buildozer_version == "stable":
         # Install stable buildozer from PyPI
         subprocess.check_call([*pip_install, "buildozer"])

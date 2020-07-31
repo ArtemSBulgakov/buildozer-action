@@ -118,7 +118,7 @@ def apply_patches():
         f"""
     @property
     def global_buildozer_dir(self):
-        return '{os.environ["GITHUB_WORKSPACE"]}/.buildozer_global'
+        return '{env["GITHUB_WORKSPACE"]}/{env["INPUT_REPOSITORY_ROOT"]}/.buildozer_global'
 """,
     )
     if new_source == source:

@@ -95,6 +95,8 @@ def apply_patches():
     print("::group::Applying patches to Buildozer")
     try:
         import importlib
+        import site
+        importlib.reload(site)
         globals()["buildozer"] = importlib.import_module("buildozer")
     except ImportError:
         print(

@@ -154,66 +154,56 @@ git push origin data
 
 ## Full workflow
 
-Builds app and uploads to the `data` branch. Also copy
-[.ci/move_binary.py](.ci/move_binary.py) script and create `data` branch as
-described above.
+Full workflow with uploading binaries as artifact.
 
 ```yaml
 name: Build
-on:
-  push:
-    branches-ignore:
-      - data
-      - gh-pages
-    tags:
-      - '**'
-  pull_request:
-    branches-ignore:
-      - data
-      - gh-pages
+on: [push, pull_request]
 
 jobs:
-  # Build job. Builds app for Android with Buildozer
-  build-android:
-    name: Build for Android
-    runs-on: ubuntu-latest
+# Build job. Builds app for Android with Buildozer
+build-android:
+  name: Build for Android
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          path: master
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          repository_root: master
-          workdir: test_app
-          buildozer_version: stable
+    - name: Build with Buildozer
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
+      with:
+        workdir: test_app
+        buildozer_version: stable
 
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          path: data
-          ref: data # Branch name
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-          architecture: x64
-
-      - name: Push binary to data branch
-        run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: ${{ steps.buildozer.outputs.filename }}
 ```
 
 <details>
-  <summary>Full workflow with uploading binaries as artifact</summary>
+  <summary>Full workflow with uploading binaries to branch</summary>
+
+  Builds app and uploads to the `data` branch. Also copy
+  [.ci/move_binary.py](.ci/move_binary.py) script and create `data` branch as
+  described above.
 
   ```yaml
   name: Build
-  on: [push, pull_request]
+  on:
+    push:
+      branches-ignore:
+        - data
+        - gh-pages
+      tags:
+        - '**'
+    pull_request:
+      branches-ignore:
+        - data
+        - gh-pages
 
   jobs:
     # Build job. Builds app for Android with Buildozer
@@ -224,19 +214,31 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
+          with:
+            path: master
 
         - name: Build with Buildozer
           uses: ArtemSBulgakov/buildozer-action@v1
           id: buildozer
           with:
+            repository_root: master
             workdir: test_app
             buildozer_version: stable
 
-        - name: Upload artifacts
-          uses: actions/upload-artifact@v2
+        - name: Checkout
+          uses: actions/checkout@v2
           with:
-            name: package
-            path: ${{ steps.buildozer.outputs.filename }}
+            path: data
+            ref: data # Branch name
+  
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.7
+            architecture: x64
+  
+        - name: Push binary to data branch
+          run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
   ```
 </details>
 

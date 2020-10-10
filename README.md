@@ -98,7 +98,7 @@ Example:
   id: buildozer
   with:
     command: buildozer android debug
-    workir: src
+    workdir: src
     buildozer_version: stable
 ```
 

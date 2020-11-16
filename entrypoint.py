@@ -132,10 +132,11 @@ def apply_patches():
 
 def run_command(command):
     # Run command
-    retcode = subprocess.check_call(command.split())
-    if retcode:
-        print(f'::error::Error while executing command "{command}"')
-        exit(1)
+    for subcommand in command.split(';'):
+        retcode = subprocess.check_call(subcommand.split())
+        if retcode:
+            print(f'::error::Error while executing command "{subcommand}"')
+            exit(1)
 
 
 def set_output(repository_root, workdir):

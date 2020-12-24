@@ -81,6 +81,12 @@ build-android:
             workdir: test_app
             buildozer_version: stable
 
+        - name: Upload artifacts
+          uses: actions/upload-artifact@v2
+          with:
+            name: package
+            path: ${{ steps.buildozer.outputs.filename }}
+
         - name: Checkout
           uses: actions/checkout@v2
           with:
@@ -94,6 +100,7 @@ build-android:
             architecture: x64
 
         - name: Push binary to data branch
+          if: github.event_name == 'push'
           run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
   ```
 </details>
@@ -241,6 +248,7 @@ add this to your workflow:
     architecture: x64
 
 - name: Push binary to data branch
+  if: github.event_name == 'push'
   run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data bin
 ```
 

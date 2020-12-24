@@ -241,7 +241,7 @@ add this to your workflow:
     architecture: x64
 
 - name: Push binary to data branch
-  run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
+  run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data bin
 ```
 
 Also you need to create `data` branch:

@@ -65,7 +65,16 @@ os.makedirs(directory, exist_ok=True)
 subprocess.check_call(["git", "config", "user.name", author_name])
 subprocess.check_call(["git", "config", "user.email", author_email])
 # Ensure that there are no changes
-subprocess.check_call(["git", "pull", "origin", data_repository, "--ff-only"])
+subprocess.check_call(
+    [
+        "git",
+        "pull",
+        "origin",
+        data_repository,
+        "--ff-only",
+        "--allow-unrelated-histories",
+    ]
+)
 
 # Try to push several times
 for i in range(3):
@@ -86,7 +95,15 @@ for i in range(3):
         )
         # Pull new changes
         subprocess.check_call(
-            ["git", "pull", "origin", data_repository, "--force", "--ff-only"]
+            [
+                "git",
+                "pull",
+                "origin",
+                data_repository,
+                "--force",
+                "--ff-only",
+                "--allow-unrelated-histories",
+            ]
         )
     else:
         break  # Exit loop if there is no errors

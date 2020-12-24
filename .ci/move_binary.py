@@ -58,12 +58,12 @@ author_name = subprocess.check_output(
 author_email = subprocess.check_output(
     ["git", "log", "-1", "--pretty=format:%ae"]
 ).decode("utf-8")
-subprocess.check_call(["git", "config", "user.name", author_name])
-subprocess.check_call(["git", "config", "user.email", author_email])
 
 # Prepare for pushing
 os.chdir(data_repository_directory)
 os.makedirs(directory, exist_ok=True)
+subprocess.check_call(["git", "config", "user.name", author_name])
+subprocess.check_call(["git", "config", "user.email", author_email])
 # Ensure that there are no changes
 subprocess.check_call(["git", "pull", "origin", data_repository, "--ff-only"])
 

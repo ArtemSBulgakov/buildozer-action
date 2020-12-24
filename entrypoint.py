@@ -132,7 +132,7 @@ def apply_patches():
 
 def run_command(command):
     # Run command
-    retcode = subprocess.check_call(command.split())
+    retcode = subprocess.check_call(command, shell=True)
     if retcode:
         print(f'::error::Error while executing command "{command}"')
         exit(1)

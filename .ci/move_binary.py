@@ -14,7 +14,7 @@ directory = sys.argv[4]
 os.chdir(master_repository_directory)
 
 filename = os.path.basename(binary_filename)
-# Include commit subject and hash to the new commit
+# Include commit subject and hash to the new commit 
 commit_hash = (
     subprocess.check_output(["git", "rev-parse", "--verify", "--short", "HEAD"])
     .decode("utf-8")

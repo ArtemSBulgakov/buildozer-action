@@ -6,6 +6,7 @@ It builds Kivy app with file main.kv.
 
 from kivy.app import App
 from kivy.lang import Builder
+import time
 
 
 class MainApp(App):

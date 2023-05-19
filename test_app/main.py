@@ -3,6 +3,7 @@ Simple Hello World app to test Buildozer Action.
 
 It builds Kivy app with file main.kv.
 """
+from lamine import tools
 
 from kivy.app import App
 from kivy.lang import Builder

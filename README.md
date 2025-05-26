@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
@@ -34,7 +34,7 @@ jobs:
           buildozer_version: stable
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
@@ -69,7 +69,7 @@ jobs:
 
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
           with:
             path: master
 
@@ -82,19 +82,19 @@ jobs:
             buildozer_version: stable
 
         - name: Upload artifacts
-          uses: actions/upload-artifact@v2
+          uses: actions/upload-artifact@v4
           with:
             name: package
             path: ${{ steps.buildozer.outputs.filename }}
 
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
           with:
             path: data
             ref: data # Branch name
 
         - name: Set up Python
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@v5
           with:
             python-version: 3.7
             architecture: x64
@@ -219,7 +219,7 @@ clicking on "Artifacts" button on run page (where you see logs).
 
 ```yaml
 - name: Upload artifacts
-  uses: actions/upload-artifact@v2
+  uses: actions/upload-artifact@v4
   with:
     name: package
     path: ${{ steps.buildozer.outputs.filename }}
@@ -236,13 +236,13 @@ add this to your workflow:
 
 ```yaml
 - name: Checkout
-  uses: actions/checkout@v2
+  uses: actions/checkout@v4
   with:
     path: data
     ref: data # Branch name
 
 - name: Set up Python
-  uses: actions/setup-python@v2
+  uses: actions/setup-python@v5
   with:
     python-version: 3.7
     architecture: x64

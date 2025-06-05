@@ -5,9 +5,6 @@ FROM ghcr.io/kivy/buildozer:latest
 # This is needed to install version specified by user
 RUN pip3 uninstall -y buildozer
 
-# Update Cython as Buildozer now requires it to build successfully
-RUN pip install --upgrade Cython
-
 # Get the latest JDK version as Buildozer requires the latest version to build the APK
 RUN sudo apt-get update && \
     sudo apt-get install -y software-properties-common && \

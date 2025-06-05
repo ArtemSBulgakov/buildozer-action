@@ -154,7 +154,12 @@ def set_output(repository_root, workdir):
     )
     # Run with sudo to have access to GITHUB_OUTPUT file
     subprocess.check_call(
-        ["sudo", "bash", "-c", f"echo 'filename={path}' >> $GITHUB_OUTPUT"]
+        [
+            "sudo",
+            "bash",
+            "-c",
+            f"echo 'filename={path}' >> {os.environ['GITHUB_OUTPUT']}",
+        ]
     )
 
 
